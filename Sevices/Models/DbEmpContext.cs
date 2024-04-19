@@ -18,9 +18,9 @@ public partial class DbEmpContext : DbContext
     public virtual DbSet<Tblemployee> Tblemployee { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-/*        => optionsBuilder.UseSqlServer("Server=DESKTOP-RDTOV1B\\SQLEXPRESS01;Database=dbEmp;user=pos;pwd=admin@123;Trusted_Connection=True;TrustServerCertificate=True");
-*/        => optionsBuilder.UseSqlServer("Server=DESKTOP-UT08VFA\\MSSQLSERVER01;Database=dbEmp;user=sa;pwd=admin@123;Trusted_Connection=True;TrustServerCertificate=True");
-
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-RDTOV1B\\SQLEXPRESS01;Database=dbEmp;user=pos;pwd=admin@123;Trusted_Connection=True;TrustServerCertificate=True");
+/*        => optionsBuilder.UseSqlServer("Server=DESKTOP-UT08VFA\\MSSQLSERVER01;Database=dbEmp;user=sa;pwd=admin@123;Trusted_Connection=True;TrustServerCertificate=True");
+*/
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Tblemployee>(entity =>

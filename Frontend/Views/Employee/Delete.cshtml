@@ -1,66 +1,60 @@
 ﻿@model EmployeeDetails
-<form asp-action="CreateEmployee">
+<form asp-action="Delete">
     <br />
     <div class="container border p-3">
         <h1 class="text-white text-center">Create Coupon</h1>
+        <input asp-for="EmployeeId" hidden />
 
         <hr />
         <div class="row">
             <div class="col-2">
-                <label class="control-label pt-2" style="font-size:20px;"> Full Name</label>
+                <label class="control-label pt-2"  style="font-size:20px;"> Full Name</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
+                <input asp-for="FullName" disabled class="form-control" />
             </div>
             <div class="col-2">
                 <label class="control-label pt-2" style="font-size:20px;">User Name</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <input asp-for="Username" disabled class="form-control" />
             </div>
             <div class="col-2">
                 <label class="control-label pt-2" style="font-size:20px;">Password</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="Password" disabled class="form-control" />
             </div>
             <div class="col-2">
                 <label class="control-label pt-2" style="font-size:20px;"> Email Id</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div> 
+                <input asp-for="Email" disabled class="form-control" />
+            </div>
             <div class="col-2">
                 <label class="control-label pt-2" style="font-size:20px;"> Position</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Position" class="form-control" />
-                <span asp-validation-for="Position" class="text-danger"></span>
+                <input asp-for="Position" disabled class="form-control" />
             </div>
             <div class="col-2">
                 <label class="control-label pt-2" style="font-size:20px;">Department</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Department" class="form-control" />
-                <span asp-validation-for="Department" class="text-danger"></span>
+                <input asp-for="Department" disabled class="form-control" />
             </div>
             <div class="col-2">
                 <label class="control-label pt-2" style="font-size:20px;">Hire Date</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="HireDate" class="form-control" />
-                <span asp-validation-for="HireDate" class="text-danger"></span>
+                <input asp-for="HireDate" disabled class="form-control" />
             </div>
             <div class="col-5 offset-2">
 
                 <a asp-controller="Employee" asp-action="Index" class="btn-primary btn form-control ">Back to List</a>
             </div>
             <div class="col-5">
-                <input type="submit" value="Create" class="btn btn-success form-control" />
+                <input type="submit" value="Delete" class="btn btn-danger form-control" />
 
             </div>
 

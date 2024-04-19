@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Sevices.Models;
+using static Azure.Core.HttpHeader;
 
 namespace Sevices.Controllers
 {
@@ -90,7 +92,7 @@ namespace Sevices.Controllers
         {
             try
             {
-                Tblemployee emp= _dbContext.Tblemployee.First(emp => emp.Email == employee.Email );
+                Tblemployee emp= _dbContext.Tblemployee.FirstOrDefault(emp => emp.Email == employee.Email );
                 if(emp==null)
                 {
                     Tblemployee empList = _mapper.Map<Tblemployee>(employee);
@@ -156,6 +158,27 @@ namespace Sevices.Controllers
             return responseModel;
 
 
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public ResponseModel Delete(int id)
+        {
+            try
+            {
+                Tblemployee obj = _dbContext.Tblemployee.First(u => u.EmployeeId == id);
+                _dbContext.Tblemployee.Remove(obj);
+                _dbContext.SaveChanges();
+                responseModel.IsSuccess = true;
+                responseModel.Message = "Deleted Successfully";
+
+            }
+            catch (Exception ex)
+            {
+                responseModel.IsSuccess = false;
+                responseModel.Message = ex.Message;
+            }
+            return responseModel;
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Frontend.IService
          Task<ResponseModel> GetAllAsync();
         Task<ResponseModel> AddAsync(EmployeeDetails employee);
         Task<ResponseModel> UpdateAsync(EmployeeDetails employee);
-
+        Task<ResponseModel?> DeleteAsync(int id);
     }
 }

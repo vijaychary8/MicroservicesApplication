@@ -48,5 +48,14 @@ namespace Frontend.Service
                 Url = StaticDetails.EmployeeAPIBase + "/api/employee/update"
             });
         }
+        public async Task<ResponseModel> DeleteAsync(int employeeId)
+        {
+            return await _baseService.SendAsync(new RequestModel()
+            {
+                ApiType = StaticDetails.ApiType.DELETE,
+                Url = StaticDetails.EmployeeAPIBase + "/api/employee/" + employeeId
+
+            });
+        }
     }
 }
