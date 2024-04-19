@@ -22,7 +22,12 @@ namespace Frontend.Controllers
 
                 empList = JsonConvert.DeserializeObject<List<EmployeeDetails>>(Convert.ToString(response.Result));
             }
-            return View();
+            return View(empList);
+        }
+
+        public async Task<IActionResult> CreateEmployee()
+        {
+           return View();
         }
     }
 }

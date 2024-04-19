@@ -1,5 +1,71 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<EmployeeDetails>
+
+@* @{
+	Layout = "_Layout.cshtml";
+} *@
+
+
+<div class="card shadow border-0 mt-4">
+	<div class="card-header bg-secondary bg-gradient ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="text-white">Employee List</h1>
+			</div>
+		</div>
+	</div>
+	<div class="card-body p-4">
+		<div class="row pb-3">
+			<div class="col-6">
+			</div>
+			<div class="col-6 text-end">
+				<a asp-action="CreateEmployee"  class="btn btn-outline-primary"><i class="bi bi-plus-square"></i> Add Employee</a>
+
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Employee
+					</th>
+					<th>
+						Email ID
+					</th>
+					<th>
+						Position
+					</th>
+					<th>
+						Department
+					</th>
+					<th>
+						Action
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach(var item in Model)
+				{
+				<tr>
+					<td> @item.FullName
+					</td>
+					<td> @item.Email
+					</td>
+						<td>
+							@item.Position
+					</td>
+					<td>
+						@item.Department
+					</td>
+					<td>
+							<a asp-action="CouponDelete" asp-route-couponId="@item.EmployeeId" class="btn btn-danger">
+							<i class="bi bi-trash"></i>
+						</a>
+					</td>
+				</tr>
+				}
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
