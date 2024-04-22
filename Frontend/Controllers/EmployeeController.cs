@@ -19,7 +19,6 @@ namespace Frontend.Controllers
             List<EmployeeDetails> empList = new();
             ResponseModel response =await _employeeService.GetAllAsync();
             if(response != null && response.IsSuccess) {
-                TempData["success"] = response?.Message;
 
                 empList = JsonConvert.DeserializeObject<List<EmployeeDetails>>(Convert.ToString(response.Result));
             }
