@@ -30,14 +30,23 @@ namespace AuthApi.Controllers
                 return BadRequest(response);
 
             }
+            response.IsSuccess = true;
+
             return Ok(response);
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginModel obj)
         {
-            return Ok();
+            var loginResponse = await _authService.Login(obj);
+            if(loginResponse.User == null) {
+                response.IsSuccess = false;
+                response.Message = "User Credentials are Incorrect";
+                return BadRequest(response);
+            }
+            response.Result= loginResponse;
+            return Ok(response);
         }
     }
 }

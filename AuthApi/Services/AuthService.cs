@@ -18,9 +18,27 @@ namespace AuthApi.Services
         
         }
 
-        public Task<LoginResponseModel> Login(LoginModel obj)
+        public async Task<LoginResponseModel> Login(LoginModel obj)
         {
-            throw new NotImplementedException();
+            var user = _dbContext.ApplicationUsers.FirstOrDefault(user => user.UserName.ToLower() == obj.UserName.ToLower());
+            bool isValid=await _userManager.CheckPasswordAsync(user, obj.Password);
+            if(user==null || isValid== false)
+            {
+                return new LoginResponseModel() { User=null,Token=""};
+            }
+            UserModel userModel = new()
+            {
+                Email = user.Email,
+                Id = user.Id,
+                Name = user.Name,
+                PhoneNumber = user.PhoneNumber
+            };
+            LoginResponseModel response = new LoginResponseModel
+            {
+                User=userModel,
+                Token=""
+            };
+            return response;
         }
 
         public async Task<String> Register(RegistrationModel obj)
@@ -42,7 +60,7 @@ namespace AuthApi.Services
                     UserModel userModel = new()
                     {
                         Email = userToReturn.Email,
-                        Id = Convert.ToInt32(userToReturn.Id),
+                        Id = userToReturn.Id,
                         Name = userToReturn.Name,
                         PhoneNumber = userToReturn.PhoneNumber
                     };
