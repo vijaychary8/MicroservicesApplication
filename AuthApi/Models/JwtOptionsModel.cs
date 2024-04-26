@@ -3,7 +3,7 @@
     public class JwtOptionsModel
     {
         public string? Issuer{ get; set; }=string.Empty;
-        public string? Ausience { get; set; } = string.Empty; 
-        public string? Secert { get; set; } = string.Empty;
+        public string? Audience { get; set; } = string.Empty; 
+        public string? Secret { get; set; } = string.Empty;
     }
 }

@@ -48,5 +48,21 @@ namespace AuthApi.Controllers
             response.Result= loginResponse;
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("AssignRole")]
+        public async Task<IActionResult> AssignRole(RegistrationModel obj)
+        {
+            var assigneRole = await _authService.AssignRole(obj.Email,obj.Role);
+            if (!assigneRole)
+            {
+                response.IsSuccess = false;
+                response.Message = "Error Encountered";
+                return BadRequest(response);
+            }
+            response.IsSuccess = true;
+
+            return Ok(response);
+        }
     }
 }

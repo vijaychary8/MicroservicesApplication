@@ -10,12 +10,29 @@ namespace AuthApi.Services
         private readonly DbEmpContext _dbContext;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
         public AuthService(DbEmpContext db,UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager) { 
+            RoleManager<IdentityRole> roleManager,IJwtTokenGenerator jwtTokenGenerator) { 
             _dbContext= db;
             _userManager= userManager;
             _roleManager= roleManager;
+            _jwtTokenGenerator= jwtTokenGenerator;
         
+        }
+
+        public async Task<bool> AssignRole(string email, string rolename)
+        {
+            var user=_dbContext.ApplicationUsers.FirstOrDefault(x=>x.Email.ToLower() == email.ToLower());
+            if (user != null)
+            {
+                if(!_roleManager.RoleExistsAsync(rolename).GetAwaiter().GetResult())
+                {
+                    _roleManager.CreateAsync(new IdentityRole(rolename)).GetAwaiter().GetResult();
+                }
+                await _userManager.AddToRoleAsync(user, rolename);
+                return true;
+            }
+            return false;
         }
 
         public async Task<LoginResponseModel> Login(LoginModel obj)
@@ -26,6 +43,11 @@ namespace AuthApi.Services
             {
                 return new LoginResponseModel() { User=null,Token=""};
             }
+
+          var token=  _jwtTokenGenerator.GenerateToken(user);
+
+
+
             UserModel userModel = new()
             {
                 Email = user.Email,
@@ -36,7 +58,7 @@ namespace AuthApi.Services
             LoginResponseModel response = new LoginResponseModel
             {
                 User=userModel,
-                Token=""
+                Token=token
             };
             return response;
         }
