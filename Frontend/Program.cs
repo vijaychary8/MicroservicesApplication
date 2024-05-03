@@ -15,9 +15,13 @@ namespace Frontend
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddHttpClient();
             builder.Services.AddHttpClient<IEmployeeService, EmployeeService>();
+            builder.Services.AddHttpClient<IAuthService, AuthServices>();
 
             StaticDetails.EmployeeAPIBase = builder.Configuration["ServiceUrls:EmployeeApi"];
+            StaticDetails.AuthApiBase = builder.Configuration["ServiceUrls:AuthApi"];
+
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IAuthService, AuthServices>();
             builder.Services.AddScoped<IBaseService, BaseService>();
 
 
