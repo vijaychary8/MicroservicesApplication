@@ -23,12 +23,12 @@ namespace Frontend.Service
             });
         }
 
-        public async Task<ResponseModel> LoginAsync(LoginRequest loginRequest)
+        public async Task<ResponseModel> LoginAsync(LoginModel loginModel)
         {
             return await _baseService.SendAsync(new RequestModel()
             {
                 ApiType = StaticDetails.ApiType.POST,
-                Data = loginRequest,
+                Data = loginModel,
                 Url = StaticDetails.AuthApiBase + "/api/auth/login"
             });
         }
